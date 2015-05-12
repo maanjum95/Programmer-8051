@@ -22,11 +22,12 @@
 *	DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF 
 *	OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ********************************************************************************************************/
-/**
-*	Working of the programmer is based on the datasheet specifications of
+/*************************************** SERIAL PROGRAMMING **********************************************
+*
+*	Working of serial programming is based on the datasheet specifications of
 *	Atmel AT89S51 Datasheet (http://www.keil.com/dd/docs/datashts/atmel/at89s51_ds.pdf)
 *	
-*	Serial Programming Algorithm is used which follows the following steps:
+*	Serial Programming Algorithm follows the following steps:
 *		1- Power Up Sequence (Vcc & GND), setting RST to 'H' and connection crystal across XTAL1&2
 *		2- Enabling Serial Programming by sending Programming Enable Serial Instruction to MOSI &
 *				the frequency used for the SCK clock must be 1/16 times that of crystal connected across XTAL1&2 
@@ -47,6 +48,7 @@
 *	IMP
 *		1- Singature bytes are not readable in Lock Bit Modes 3 & 4
 */
+
 #ifndef PROGRAMMER_8051_H
 #define PROGRAMMER_8051_H
 
@@ -59,7 +61,7 @@
 //	Dont cares or X will be treated as 0's
 #define DONT_CARE 0x00
 
-#define PROG_EN_1 0x54
+#define PROG_EN_1 0xAC
 #define PROG_EN_2 0x53
 #define PROG_EN_3 DONT_CARE
 #define PROG_EN_4 DONT_CARE

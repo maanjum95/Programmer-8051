@@ -50,9 +50,9 @@ void Programmer_8051::exec(void) {
 	//	When starting the programming we must first pull up the RST pin to "1" and,
 	//	wait 64 cycles (on a 16MHz crystal it is equivalent to 4ms)
 	digitalWrite(this->_pins.SCK, 0);
+	delay(DELAY_RESET_ms);
 	digitalWrite(this->_pins.RST, 1);
 	delay(DELAY_RESET_ms);
-	//Serial.println("We are online!");
 
 	while(exec) {
 		// Executing an instruction depending upon the serial input
@@ -110,15 +110,13 @@ void Programmer_8051::exec(void) {
 				break;
 			case EXIT:
 				exec = false;
-				//Serial.print("Exiting the programming sequence.");
 				Serial.write(SUCCESS);
+				delay(1000);
 				break;
 			default:
 				Serial.write(DONT_CARE);
 			break;
-				//Serial.print("Wrong Instruction Code!");
 		}
-		//Serial.println();
 	}
 	//	When the burning has finished we set RST to Low
 	digitalWrite(this->_pins.RST, 0);
@@ -132,9 +130,6 @@ void Programmer_8051::exec(void) {
 }
 
 byte Programmer_8051::sendSPI(byte instruc) {
-	//Serial.print(instruc, HEX);
-	//Serial.print(" ");
-
 	byte toReturn;
 	byte temp = instruc;
 	byte bitOutput;

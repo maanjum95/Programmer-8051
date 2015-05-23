@@ -91,6 +91,12 @@ public class Programmer_8051_Terminal {
 	}
 	
 	private void commandEnable() {
+		// if the connection to Arduino has not been made
+		if (this.serialCom == null) {
+			System.out.println("Error: Connection has not been made to the Arduino.");
+			return;
+		}
+		
 		// After the connection has been made we need to enable programming
 		try {
 			if (this.serialCom.enableProc())
@@ -105,6 +111,12 @@ public class Programmer_8051_Terminal {
 	}
 	
 	private void commandDisconnect() {
+		// if the connection to Arduino has not been made
+		if (this.serialCom == null) {
+			System.out.println("Error: Connection has not been made to the Arduino.");
+			return;
+		}
+		
 		try {
 			if (this.serialCom.disableProc()) // disabling programming
 				System.out.println("Programming successfully disabled!");
@@ -137,6 +149,12 @@ public class Programmer_8051_Terminal {
 	}
 	
 	private void commandProgram() {
+		// if the connection to Arduino has not been made
+		if (this.serialCom == null) {
+			System.out.println("Error: Connection has not been made to the Arduino.");
+			return;
+		}
+		
 		System.out.println("Enter file name with complete path: ");
 		String fileName = this.scanner.next();
 		System.out.println(fileName);
@@ -167,6 +185,12 @@ public class Programmer_8051_Terminal {
 	}
 	
 	private void commandErase() {
+		// if the connection to Arduino has not been made
+		if (this.serialCom == null) {
+			System.out.println("Error: Connection has not been made to the Arduino.");
+			return;
+		}
+		
 		System.out.println("Erasing the Chip! Wait 5 secs max.");
 		if (this.commandStatus()) {
 			try {
@@ -182,6 +206,12 @@ public class Programmer_8051_Terminal {
 	}
 	
 	private void commandDump() {
+		// if the connection to Arduino has not been made
+		if (this.serialCom == null) {
+			System.out.println("Error: Connection has not been made to the Arduino.");
+			return;
+		}
+		
 		System.out.println("Enter the file name to dump ROM: ");
 		String fileName = this.scanner.next();
 		System.out.println("Dumping ROM contents to " + fileName);
